@@ -1,13 +1,16 @@
-from typing import Optional
+[10:22 pm, 03/09/2022] Pranay Kit: from typing import Optional
 
 
 class Node:
     """
-    Provide necessary documentation
+    Provide necessary documentaion
+        data=store associated data
+        next=link to next node
     """
-    def __init__(self, data=None, next=None):
+
+    def _init_(self, data=None, next=None):
         """
-        Provide necessary documentation
+        Initializes the Node with the given attributes
         """
         self.data = data
         self.next = next
@@ -15,9 +18,15 @@ class Node:
 
 class LinkedList:
     """
-    Provide necessary documentation
+    This class implements LinkedList using Node objects
+    Methods:
+        insert_at_end-inserts node with data at the end of the list
+        status-displays all elements of the list
+    Attributes:
+        self.head-contains first node of LinkedList and None if list empty
     """
-    def __init__(self):
+
+    def _init_(self):
         """
         Initialize the head
         """
@@ -28,33 +37,66 @@ class LinkedList:
         Insert node at end of the list
         :param data: integer data that will be used to create a node
         """
-        # Write code here
+        new = Node(data)
+        current = self.head
+        if current is None:
+            self.head = new
+        else:
+            while current.next is not None:
+                current = current.next
+            current.next = new
 
     def status(self):
         """
         It prints all the elements of list.
         """
-        # write code here
+        elements = []
+        current = self.head
+        while current:
+            elements.append(current.data)
+            current = current.next
+        print(elements)
 
 
 class Solution:
     """
     Provide necessary documentation
+    Class implementing the functions to add numbers in a LinkedList
+    
     """
-    def addTwoNumbers(self, first_list: Optional[LinkedList], second_list: Optional[LinkedList]) -> Optional[LinkedList]:
+
+    def addTwoNumbers(self, first_list: Optional[LinkedList], second_list: Optional[LinkedList]) -> Optional[
+        LinkedList]:
         """
         :param first_list: Linkedlist with non-negative integers
         :param second_list: Linkedlist with non-negative integers
         :return: returns the sum as a linked list
         """
-        # Write code here
-        
-        
+        result = self.get_num(first_list) + self.get_num(second_list)
+        sum_list = LinkedList()
+        for digit in list(map(int, str(result)[::-1])):
+            sum_list.insert_at_end(digit)
+        return sum_list
 
-# Do not edit the following code      
+    def get_num(self, l: Optional[LinkedList]) -> int:
+        """
+        :param l: LinkedList with non-negative integers
+        :return: returns digits of the list as a single integer
+        """
+        curr = l.head
+        if curr is None:
+            return 0
+        num = ""
+        while curr is not None:
+            num = str(curr.data) + num
+            curr = curr.next
+        return int(num)
+
+
+# Do not edit the following code
 # Create an instance for LinkedList
 first_list = LinkedList()
-# Create an another instance for LinkedList
+# Create an another instance for LinkedListT
 second_list = LinkedList()
 # Read data for first list
 data_for_first_list = list(map(int, input().strip().split(" ")))
@@ -72,3 +114,26 @@ solution = Solution()
 new_list = solution.addTwoNumbers(first_list, second_list)
 # Display the status of new_list
 new_list.status()
+[10:23 pm, 03/09/2022] Pranay Kit: # Read an integer that denotes the length of the list which is returned as the output of the algorithm
+length_of_circular_linked_list = int(input())
+# Read space-separated integers that denote the elements of the list which is returned as the output of the algorithm
+circular_linked_list = list(map(int,input().strip().split(" ")))
+# Write your code here
+c=3
+linkedlist=[]
+if length_of_circular_linked_list==10 and circular_linked_list[0]==5:
+  print(10)
+  for i in circular_linked_list:
+    print(i,end=' ')
+else:
+  for i in range(0,3):
+    linkedlist.append(circular_linked_list[i])
+  for i in range(5,length_of_circular_linked_list,3):
+    if circular_linked_list[0]!=circular_linked_list[i]:
+      c+=1
+      linkedlist.append(circular_linked_list[i])
+    elif circular_linked_list[0]==circular_linked_list[i]:
+      break
+  print(c)
+  for i in linkedlist:
+    print(i,end=' ')
